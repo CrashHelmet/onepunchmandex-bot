@@ -1,0 +1,142 @@
+// systems/opmEmojis.js
+
+const emojiMap = {
+    Saitama: "<:Saitama:1477415542817034361>",
+    God: "<:God:1477427789090127932>",
+    Cosmic_Garou: "<:Cosmic_Garou:1477423479773986999>",
+    MeteoricBurstBoros: "<:MeteoricBurst_Boros:1477459914698784869>",
+    King: "<:King:1477420024472801401>",
+    Blast: "<:Blast:1477419823024701570>",
+
+    MonsterGarou: "<:Monster_Garou:1477423363252158585>",
+    Sage_Centipede: "<:Sage_Centipede:1477427668516343960>",
+    EvilNaturalOcean: "<:EvilNaturalOcean:1477429537779351632>",
+    EvilNaturalWater: "<:EvilNaturalWater:1477428234948710605>",
+    HalfMonster_Garou: "<:HalfMonster_Garou:1477423167747129568>",
+
+    // ✔ FIXED — characters.js slug kept, emoji name corrected
+    Armoured_Boros: "<:Armored_Boros:1477459768460443904>",
+
+    Released_Boros: "<:Released_Boros:1477459413232259185>",
+
+    // ✔ FIXED — characters.js slug kept, emoji name corrected
+    ElderCentipede_Pre: "<:ElderCentipede_PreMolting:1477458162302058537>",
+    ElderCentipede_Post: "<:ElderCentipede_PostMolting:1477457836752769045>",
+
+    // ✔ FIXED — characters.js slug kept, emoji name corrected
+    Marugori: "<:Marugori_Giant:1477428125297021078>",
+    Cruel_Dragon: "<:Cruel_Dragon:1478203554698235914>",
+    MonsterKingOrochi: "<:MonsterKingOrochi:1477459035195314308>",
+    Nyan: "<:Nyan:1477462973864738856>",
+    OvergrownRover: "<:OvergrownRover:1477459235586572438>",
+    Gouketsu: "<:Gouketsu:1477460583807713352>",
+    Gums: "<:Gums:1477460770169163966>",
+    MetalKnight: "<:MetalKnight:1477458943893573694>",
+    PigGod: "<:PigGod:1477420930857963654>",
+    FlashyFlash: "<:FlashyFlash:1477421035748851732>",
+    SuperalloyDarkshine: "<:SuperalloyDarkshine:1477420470214328563>",
+    WatchdogMan: "<:WatchdogMan:1477420368330358927>",
+    DriveKnight: "<:DriveKnight:1477420194375925813>",
+    Atomic_Samurai: "<:Atomic_Samurai:1477419912862367776>",
+    Groribas: "<:Groribas:1477418892170362973>",
+    Melzargard: "<:Melzargard:1477418785689567496>",
+    Geryuganshoop: "<:Geryuganshoop:1477418619653591080>",
+    Bakuzan_Monster: "<:Bakuzan_Monster:1477456743482130644>",
+    TransformedVaccineMan: "<:VaccineMan_Transformed:1477418413935689932>",
+    VaccineMan: "<:VaccineMan:1477418222734278656>",
+    Metal_Bat: "<:Metal_Bat:1477417840838443128>",
+    Bang: "<:Bang:1477416749216305322>",
+    Genos: "<:Genos:1477415871604457554>",
+    Tatsumaki: "<:Tatsumaki:1477415721897295934>",
+    AncientKing: "<:AncientKing:1477457099670819050>",
+    BlackSperm: "<:BlackSperm:1477457240804823200>",
+    Bomb: "<:Bomb:1477457383977652461>",
+    ChildEmperor_BraveGiant: "<:ChildEmperor_BraveGiant:1477420677815603311>",
+    CarnageKabuto_CarnageMode: "<:CarnageKabuto_CarnageMode:1477416391601553629>",
+    CarnageKabuto: "<:CarnageKabuto:1477416240661401610>",
+    Homeless_Emperor: "<:Homeless_Emperor:1477460944006283437>",
+    Pluton: "<:Pluton:1477463150378094713>",
+    
+    Armored_Gorilla: "<:Marshall_Gorilla:1477462861788741767>",
+    Baquma: "<:Baquma:1477457175260430397>",
+    BeastKing: "<:BeastKing:1477419441406087318>",
+    Blood_Absorbed_MosquitoGirl: "<:BloodAbsorbed_MosquitoGirl:1477457321604153384>",
+    Phoenix_Man: "<:Phoenix_Man:1477430541723635753>",
+    Senior_Centipede: "<:Senior_Centipede:1477430411864047729>",
+    ChildEmperor: "<:ChildEmperor:1477420580893495427>",
+    DeepSeaKing: "<:DeepSeaKing:1477415978429055159>",
+    DrGenus: "<:DrGenus:1477457600688820287>",
+    Fubuki: "<:Fubuki:1477416510279389194>",
+    Gale_Wind: "<:Gale_Wind:1477458447183118346>",
+    HellfireFlame: "<:HellfireFlame:1477460854642577590>",
+    Human_Garou: "<:Garou:1477422992186278045>",
+    Hydrated_DeepSeaKing: "<:Hydrated_DeepSeaKing:1477416110658687108>",
+    MachineGodG4: "<:MachineGod_G4:1477419027713359948>",
+    MachineGodG5: "<:MachineGod_G5:1477458822636241118>",
+    MosquitoGirl: "<:MosquitoGirl:1477419629511970998>",
+    PowerAbsorbed_Baquma: "<:PowerAbsorbed_Baquma:1477459314217058526>",
+    PuriPuriPrisoner: "<:PuriPuriPrisoner:1477463221827801310>",
+    Sky_King: "<:Sky_King:1477459991559540746>",
+    Speed_o_Sound_Sonic: "<:Speed_o_Sound_Sonic:1477463538233512167>",
+    SubterraneanKing: "<:Subterranean_King:1477422710559740067>",
+    SweetMask: "<:SweetMask:1477421311377543362>",
+    TanktopMaster: "<:TanktopMaster:1477421165772275833>",
+    Zombieman: "<:Zombieman:1477420774729056327>",
+    Base_Bug_God: "<:Base_Bug_God:1478532301662060544>",
+    Transformed_Bug_God: "<:Transformed_Bug_God:1478532406477852742>",
+    DefenceUnit_Level_1: "<:DefenceUnit_Level_1:1479640865528877077>",
+    DefenceUnit_Level_4: "<:DefenceUnit_Level_4:1479640932843520153>",
+
+    Subterranean: "<:Subterranean:1477430645524271114>",
+    Hammerhead: "<:Hammerhead:1477427894555771041>",
+    Bakuzan_Human: "<:Human_Bakuzan:1477461066479960064>",
+    Bushidrill: "<:Bushidrill:1477421644346687630>",
+    Crablante: "<:Crablante:1477418003766444196>",
+    Death_Gatling: "<:Death_Gatling:1477421764048064542>",
+    Eyelashes: "<:Eyelashes:1477458291712987208>",
+    Golden_Ball: "<:Golden_Ball:1477422337220415601>",
+    GroundDragon: "<:GroundDragon:1477460688246149265>",
+    Iaian: "<:Iaian:1477421419951292457>",
+    JetNiceGuy: "<:JetNiceGuy:1477461170825986119>",
+    Kamakyuri: "<:Kamakyuri:1477462144487522485>",
+    Kombu_Infinity: "<:Kombu_Infinity:1477419732172017694>",
+    LightningMax: "<:LightningMax:1477458536127529162>",
+    MagicMan: "<:MagicMan:1477462216843460860>",
+    Maiko_Plasma: "<:Maiko_Plasma:1477462488617451530>",
+    Marshall_Gorilla: "<:Marshall_Gorilla:1477462861788741767>",
+    MountainApe: "<:MountainApe:1477459121518411777>",
+    Okamaitachi: "<:Okamaitachi:1477421537253654723>",
+    Snek: "<:Snek:1477422589394686104>",
+    Spring_Mustachio: "<:Spring_Mustachio:1477422454958850089>",
+    Stinger: "<:Stinger:1477421889470206174>",
+
+    Human_Marugori: "<:Human_Marugori:1477428028488421538>",
+    All_BackMan: "<:All_BackMan:1477430695281295490>",
+    BunbunMan: "<:BunbunMan:1477457452474568726>",
+    Charanko: "<:Charanko:1477460232811581532>",
+    Dark_Matter_Gunner: "<:Dark_Matter_Gunner:1477460338831134830>",
+    D_Pad: "<:D_Pad:1477457528567890071>",
+    FrogMan: "<:FrogMan:1477460416463638709>",
+    FuneralSuspenders: "<:FuneralSuspenders:1477458370804973568>",
+    Lily: "<:Lily:1477458625239846922>",
+    Piggy_Bancon: "<:Piggy_Bancon:1477463054781255811>",
+    Seafolk: "<:Seafolk:1477463299552575619>",
+    Slugerous: "<:Slugerous:1477463367961673960>",
+    SourFace: "<:SourFace:1477463441064329327>",
+    TankTop_BlackHole: "<:TankTop_BlackHole:1477460139945754725>",
+    MessengerOfTheSeafolk: "<:MessengerOfTheSeafolk:1477419154020634705>",
+    MumenRider: "<:MumenRider:1477418110003712132>"
+};
+
+const slugToEmoji = {};
+for (const slug in emojiMap) slugToEmoji[slug] = emojiMap[slug];
+
+function getEmojiForSlug(slug) {
+    return slugToEmoji[slug] || null;
+}
+
+module.exports = {
+    emojiMap,
+    slugToEmoji,
+    getEmojiForSlug
+};

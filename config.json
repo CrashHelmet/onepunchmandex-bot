@@ -1,0 +1,24 @@
+{
+  "guilds": {
+    "1473131887932477603": {
+      "spawnChannelId": "1476300733010935973",
+      "acceptedTOS": true
+    },
+    "1474620000345133067": {
+      "spawnChannelId": "1474922167803056269",
+      "acceptedTOS": true
+    },
+    "1271347803095830579": {
+      "acceptedTOS": true,
+      "spawnChannelId": "1475731780324560998"
+    },
+    "1475249828153000155": {
+      "acceptedTOS": true,
+      "spawnChannelId": "1479676035657236541"
+    },
+    "1476358398965714976": {
+      "acceptedTOS": true,
+      "spawnChannelId": "1476396396411097119"
+    }
+  }
+}
