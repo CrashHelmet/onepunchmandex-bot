@@ -1,5 +1,5 @@
 const activeSpawns = new Map();
-const lastSpawnMap = new Map(); // ⭐ NEW: per‑guild cooldown map
+const lastSpawnMap = new Map(); // ⭐ per‑guild cooldown map
 
 // Randomized OPM‑style neutral spawn messages
 const SPAWN_MESSAGES = [
@@ -36,7 +36,6 @@ function setupSpawnSystem(
         if (!message.guild) return;
 
         const guildId = message.guild.id;
-
         const spawnChannelId = getSpawnChannelId(guildId);
         if (!spawnChannelId) return;
 
@@ -49,64 +48,71 @@ function setupSpawnSystem(
         // 15‑minute cooldown PER GUILD
         if (now - lastSpawn < 900000) return;
 
-        const character = pickByRarity(characters);
-
-        const row = new ActionRowBuilder().addComponents(
-            new ButtonBuilder()
-                .setCustomId("catch_character")
-                .setLabel("Catch me!")
-                .setStyle(ButtonStyle.Primary)
-        );
-
-        const spawnMessage = getRandomSpawnMessage();
-
-        const channel = message.guild.channels.cache.get(spawnChannelId);
-        if (!channel) return;
-
-        let sent;
-        try {
-            sent = await channel.send({
-                content: spawnMessage,
-                files: [character.image],
-                components: [row]
-            });
-        } catch (err) {
-            console.error("Spawn failed:", err);
-            return; // Do NOT lock the spawn system if sending fails
-        }
-
-        // ⭐ FIX: cooldown updates ONLY after successful spawn
-        lastSpawnMap.set(guildId, Date.now());
-
-        activeSpawnsMap.set(guildId, {
-            character,
-            messageId: sent.id,
-            channelId: channel.id,
-            caught: false,
-            fled: false
-        });
-
-        // Flee timer (5 minutes)
+        // ⭐ WAIT 5 SECONDS BEFORE SPAWNING
         setTimeout(async () => {
-            const spawn = activeSpawnsMap.get(guildId);
-            if (!spawn || spawn.caught) return;
 
-            spawn.fled = true;
+            // Double-check no spawn happened during the delay
+            if (activeSpawnsMap.has(guildId)) return;
 
+            const character = pickByRarity(characters);
+
+            const row = new ActionRowBuilder().addComponents(
+                new ButtonBuilder()
+                    .setCustomId("catch_character")
+                    .setLabel("Catch me!")
+                    .setStyle(ButtonStyle.Primary)
+            );
+
+            const spawnMessage = getRandomSpawnMessage();
+            const channel = message.guild.channels.cache.get(spawnChannelId);
+            if (!channel) return;
+
+            let sent;
             try {
-                const msg = await channel.messages.fetch(spawn.messageId);
-                const rowFled = new ActionRowBuilder().addComponents(
-                    new ButtonBuilder()
-                        .setCustomId("catch_character")
-                        .setLabel("Fled")
-                        .setStyle(ButtonStyle.Secondary)
-                        .setDisabled(true)
-                );
-                await msg.edit({ components: [rowFled] });
-            } catch {}
+                sent = await channel.send({
+                    content: spawnMessage,
+                    files: [character.image],
+                    components: [row]
+                });
+            } catch (err) {
+                console.error("Spawn failed:", err);
+                return;
+            }
 
-            activeSpawnsMap.delete(guildId);
-        }, 5 * 60 * 1000);
+            // Cooldown updates ONLY after successful spawn
+            lastSpawnMap.set(guildId, Date.now());
+
+            activeSpawnsMap.set(guildId, {
+                character,
+                messageId: sent.id,
+                channelId: channel.id,
+                caught: false,
+                fled: false
+            });
+
+            // Flee timer (5 minutes)
+            setTimeout(async () => {
+                const spawn = activeSpawnsMap.get(guildId);
+                if (!spawn || spawn.caught) return;
+
+                spawn.fled = true;
+
+                try {
+                    const msg = await channel.messages.fetch(spawn.messageId);
+                    const rowFled = new ActionRowBuilder().addComponents(
+                        new ButtonBuilder()
+                            .setCustomId("catch_character")
+                            .setLabel("Fled")
+                            .setStyle(ButtonStyle.Secondary)
+                            .setDisabled(true)
+                    );
+                    await msg.edit({ components: [rowFled] });
+                } catch {}
+
+                activeSpawnsMap.delete(guildId);
+            }, 5 * 60 * 1000);
+
+        }, 5000); // ⭐ 5‑second delay
     });
 }
 
