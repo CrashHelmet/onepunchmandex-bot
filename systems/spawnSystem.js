@@ -48,11 +48,15 @@ function setupSpawnSystem(
         // 15‑minute cooldown PER GUILD
         if (now - lastSpawn < 900000) return;
 
+        // ⭐ LOCK IMMEDIATELY TO PREVENT MULTIPLE TIMERS
+        activeSpawnsMap.set(guildId, { pending: true });
+
         // ⭐ WAIT 5 SECONDS BEFORE SPAWNING
         setTimeout(async () => {
 
-            // Double-check no spawn happened during the delay
-            if (activeSpawnsMap.has(guildId)) return;
+            // If something spawned or was caught during delay, stop
+            const pending = activeSpawnsMap.get(guildId);
+            if (!pending || pending.caught || pending.fled) return;
 
             const character = pickByRarity(characters);
 
@@ -76,12 +80,14 @@ function setupSpawnSystem(
                 });
             } catch (err) {
                 console.error("Spawn failed:", err);
+                activeSpawnsMap.delete(guildId); // unlock on failure
                 return;
             }
 
             // Cooldown updates ONLY after successful spawn
             lastSpawnMap.set(guildId, Date.now());
 
+            // Replace pending lock with real spawn data
             activeSpawnsMap.set(guildId, {
                 character,
                 messageId: sent.id,
